@@ -5,6 +5,7 @@
       "ms-python.vscode-pylance",
       "ms-python.black-formatter",
       "tamasfe.even-better-toml",
-      "charliermarsh.ruff"
+      "charliermarsh.ruff",
+      "autoDocstring"
     ]
   }
