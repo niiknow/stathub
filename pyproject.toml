@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "stathub"
+version = "0.1.0"
+description = "High performance, flat-file stats collection that support multi-tenancy with python and nginx"
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+Quart = "^0.19.4"
+Hypercorn = "^0.16.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

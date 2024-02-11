@@ -1,0 +1,32 @@
+{
+    "files.exclude": {
+      "**/*.pyc": true,
+      "htmlcov": true,
+      "build": true,
+      "*.log": true,
+      "*.egg-info": true,
+      "pytest-*.xml": true,
+    },
+    "search.exclude": {
+      "**/*.code-search": true,
+      "dist*": true,
+    },
+    "html.format.templating": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+      "--rootdir=."
+    ],
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.black-formatter",
+      "editor.formatOnSave": true,
+      "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "source.organizeImports.ruff": "explicit",
+        "source.organizeImports.isort": "never",
+        "source.organizeImports.isort.check": "never"
+      },
+    },
+    "python.analysis.stubPath": "stubs",
+    "yaml.customTags": ["!reference sequence"],
+  }
