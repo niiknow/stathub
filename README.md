@@ -3,6 +3,7 @@ High performance, flat-file stats collection that support multi-tenancy with pyt
 
 # strategy
 > For high performance, live tracking of hit/counter, we put nginx in front because nginx has been battle tested and is most used web servers.
+
 ![Market Share][https://blog.logrocket.com/wp-content/uploads/2021/10/w3-web-server-popularity-by-ranking.png]
 
 NGINX docker container in docker-compose with config to log file as json: tenant-key-yyyy-MM-dd-hh-mm.json
