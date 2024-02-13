@@ -6,7 +6,7 @@ High performance, flat-file stats collection that support multi-tenancy with pyt
 
 ![Market Share](https://blog.logrocket.com/wp-content/uploads/2021/10/w3-web-server-popularity-by-ranking.png)
 
-NGINX docker container in docker-compose with config to log file as json: tenant-key-yyyy-MM-dd-hh-mm.json
+NGINX docker container in docker-compose with config to log file as json `$tenant-$key/$year-$month-$day-$hour.log`
 
 ```nginx
 # placeholder
@@ -22,7 +22,7 @@ server {
     set $seconds $6;
   }
 
-  # this is reference to what all we can log 
+  # this is reference to what are available
   log_format main_json escape=json '{'
     '"msec": "$msec", ' # request unixtime in seconds with a milliseconds resolution
     '"connection": "$connection", ' # connection serial number
@@ -77,7 +77,9 @@ server {
     '"connection_requests": "$connection_requests", ' # number of requests made in connection
     '"request_time": "$request_time", ' # request processing time in seconds with msec resolution
     '"args": "$args", ' # args
+    '"tv": "$arg_tv", ' # stathub track value, we default empty as 1 when use to increment counter
   '}';
+
   # disable access log by default
   access_log off;
 
@@ -93,7 +95,7 @@ server {
     set $tenant    $1;
     set $key       $2;
 
-    access_log /var/log/nginx/$tenant-$key-$year-$month-$day-$hour-$minutes.log stathub_json;
+    access_log /var/log/nginx/$tenant-$key/$year-$month-$day-$hour.log stathub_json;
 
     return empty_gif;
   }
