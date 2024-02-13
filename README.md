@@ -83,7 +83,7 @@ server {
   }
 
   # You can replace prefix with anything here
-  # this act like buffer so some bad bot scan to match 
+  # this act like buffer to prevent catching bad bot scan 
   location ~ ^/prefix/([a-z0-9]+)/([^/]+)$ {
     set $tenant    $1;
     set $key       $2;
@@ -100,6 +100,6 @@ Python3 docker image with application access to docker sock.  This allow us to s
 # Why Python?  Also, why JSON and not CSV or TSV?
 > Why Python and not NodeJS or any other language?
 
-Because I want to experiment working with Python.  This is my first project with newest Python framework: FastAPI and hypercorn.  Also, python has great CSV parser.  If you want smaller file to save storage, you can store as TSV instead and parse the file.  We store as JSON to make it faster to return raw log data. Simply read in the file, replace all `}\n` with comma and wrap it around `[]` to make it return array of json.
+So we can experiment with newest Python framework: FastAPI and hypercorn.  Also, python has great CSV parser.  If you want smaller file to save storage, you can store as TSV instead and parse the file.  We store as JSON to make it faster to return raw log data. Simply read in the file, replace all `}\n` with `},` and wrap it around `[]` to make it return array of json.
 
 # MIT
