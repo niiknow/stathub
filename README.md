@@ -2,7 +2,7 @@
 High performance, flat-file stats collection that support multi-tenancy with python and nginx
 
 # strategy
-> For high performance, live tracking of hit/counter, we put nginx in front because nginx has been battle tested and is most used web servers.
+> For high performance, live tracking of hit/counter, we put nginx in front because nginx is popular and battle tested.
 
 ![Market Share](https://blog.logrocket.com/wp-content/uploads/2021/10/w3-web-server-popularity-by-ranking.png)
 
