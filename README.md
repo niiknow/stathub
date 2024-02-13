@@ -2,7 +2,7 @@
 High performance, flat-file stats collection that support multi-tenancy with python and nginx
 
 # strategy
-NGINX docker container in docker-compose with config to log file as json:  client-key-yyyy/MM-dd-hh-mm.json
+NGINX docker container in docker-compose with config to log file as json: tenant-key-yyyy-MM-dd-hh-mm.json
 
 ```nginx
 # placeholder
@@ -88,7 +88,7 @@ server {
     set $tenant    $1;
     set $key       $2;
 
-    access_log /var/log/nginx/$tenant-$key.$year.$month-$day-$hour-$minutes.log stathub_json;
+    access_log /var/log/nginx/$tenant-$key-$year-$month-$day-$hour-$minutes.log stathub_json;
 
     return empty_gif;
   }
