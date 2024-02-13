@@ -103,6 +103,9 @@ server {
     # this mean worker_rlimit_nofile number should be > worker_processes * worker_connections
     limit_req zone=limit_ip_10rs burst=100;
 
+    # nginx won't write log if $tenant-$key does not exists
+    # this mean we have to create this folder from our API and
+    # as a result, we prevent random/accident hit to log.
     access_log /var/log/nginx/$tenant-$key/$year-$month-$day-$hour.log stathub_json;
 
     return empty_gif;
