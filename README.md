@@ -9,7 +9,9 @@ High performance, flat-file stats collection that support multi-tenancy with pyt
 NGINX docker container in docker-compose with config to log file as json `$tenant-$key/$year-$month-$day-$hour.log`
 
 ```nginx
-# placeholder
+# remember to use `real_ip_header` if this sits behind a proxy server.
+limit_req_zone $binary_remote_addr zone=limit_ip_10rs:20m rate=10r/s;
+
 server {
   # stuff goes here
 
@@ -81,7 +83,8 @@ server {
   '}';
 
   # disable access log by default
-  access_log off;
+  access_log     off;
+  log_not_found  off;
 
   # prevent good bot from scanning
   location = /robots.txt {
@@ -94,6 +97,11 @@ server {
   location ~ ^/prefix/([a-z0-9]+)/([^/]+)$ {
     set $tenant    $1;
     set $key       $2;
+
+    # really big burst here, delay everyone else and let through after delay
+    # you can adjust this, but make sure also adjust the worker_rlimit_nofile, worker_processes, and worker_connections 
+    # this mean worker_rlimit_nofile number should be > worker_processes * worker_connections
+    limit_req zone=limit_ip_10rs burst=100;
 
     access_log /var/log/nginx/$tenant-$key/$year-$month-$day-$hour.log stathub_json;
 
