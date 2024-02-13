@@ -2,6 +2,9 @@
 High performance, flat-file stats collection that support multi-tenancy with python and nginx
 
 # strategy
+> For high performance, live tracking of hit/counter, we put nginx in front because nginx has been battle tested and is most used web servers.
+![Market Share][https://blog.logrocket.com/wp-content/uploads/2021/10/w3-web-server-popularity-by-ranking.png]
+
 NGINX docker container in docker-compose with config to log file as json: tenant-key-yyyy-MM-dd-hh-mm.json
 
 ```nginx
@@ -72,6 +75,7 @@ server {
     '"connection": "$connection", ' # connection serial number
     '"connection_requests": "$connection_requests", ' # number of requests made in connection
     '"request_time": "$request_time", ' # request processing time in seconds with msec resolution
+    '"args": "$args", ' # args
   '}';
   # disable access log by default
   access_log off;
@@ -82,7 +86,7 @@ server {
     return 200 "User-agent: *\nDisallow: /\n";
   }
 
-  # You can replace prefix with anything here
+  # Replace 'prefix' with anything here
   # this act like buffer to prevent catching bad bot scan 
   location ~ ^/prefix/([a-z0-9]+)/([^/]+)$ {
     set $tenant    $1;
