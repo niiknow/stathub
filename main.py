@@ -1,6 +1,7 @@
+from datetime import date, datetime
+
 from fastapi import FastAPI
-from datetime import datetime
-from datetime import date
+
 app = FastAPI()
 
 
@@ -12,6 +13,7 @@ async def healthcheck():
         string: OK
     """
     return "OK"
+
 
 @app.get("/statcount/{tenant}/{key}")
 async def getStatCount(tenant: str, key: str, start: date = date.today()):
@@ -26,6 +28,7 @@ async def getStatCount(tenant: str, key: str, start: date = date.today()):
         int: summation of stat count
     """
     return {"message": "Hello World"}
+
 
 @app.get("/statdata/{tenant}/{key}")
 async def getStat(tenant: str, key: str, start: date = date.today()):
@@ -44,7 +47,7 @@ async def getStat(tenant: str, key: str, start: date = date.today()):
 
 @app.get("/rawlog/{tenant}/{key}")
 async def getRawLog(tenant: str, key: str, start: date = date.today()):
-    """Get raw log data which is stored as tsv
+    """Get raw log data, which can be in tsv or json
 
     Args:
         tenant (str): tenant code
@@ -52,6 +55,6 @@ async def getRawLog(tenant: str, key: str, start: date = date.today()):
         start (datetime.date, optional): start date. Defaults to datetime.date.today().
 
     Returns:
-        str: raw log data in tsv format
+        str: raw log data, which can be in tsv or json
     """
     return {"message": "Hello World"}
